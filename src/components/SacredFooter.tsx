@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { MapPin, Phone, Mail } from "lucide-react";
+import Newsletter from "@/components/Newsletter";
 
 export default function SacredFooter() {
   return (
@@ -8,7 +9,7 @@ export default function SacredFooter() {
       <div className="h-1 bg-gradient-to-r from-transparent via-gold to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-14">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Brand */}
           <div className="lg:col-span-2">
             <div className="text-5xl font-serif text-saffron mb-3">ॐ</div>
@@ -29,6 +30,7 @@ export default function SacredFooter() {
               {[
                 { label: "Home", path: "/" },
                 { label: "Events", path: "/events" },
+                { label: "Blog", path: "/blog" },
                 { label: "Announcements", path: "/announcements" },
                 { label: "Calendar", path: "/calendar" },
                 { label: "Donation", path: "/donation" },
@@ -63,6 +65,15 @@ export default function SacredFooter() {
                 <span>seva@chaturmas.org</span>
               </li>
             </ul>
+          </div>
+
+          {/* Newsletter */}
+          <div>
+            <h4 className="font-serif text-gold text-lg mb-4">Newsletter</h4>
+            <p className="text-sm font-sans text-white/60 mb-3">
+              Get updates on events and pravachans.
+            </p>
+            <Newsletter variant="inline" />
           </div>
         </div>
       </div>

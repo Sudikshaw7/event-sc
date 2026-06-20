@@ -1,6 +1,7 @@
 import AdminSidebar from "@/components/AdminSidebar";
 import type { LucideIcon } from "lucide-react";
-import { Search, Plus, Filter, CheckCircle, XCircle, Clock, Download, ChevronDown, Utensils, User, Phone, Mail, Type } from "lucide-react";
+import { Search, Plus, Filter, CheckCircle, XCircle, Clock, Download, ChevronDown, Utensils, User, Phone, Mail, Type, Send, Link2 } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 import { useState } from "react";
 
 interface Guest {
@@ -46,6 +47,24 @@ export default function AdminGuests() {
   const [search, setSearch] = useState("");
   const [rsvpFilter, setRsvpFilter] = useState("all");
   const [showAddForm, setShowAddForm] = useState(false);
+  const { toast } = useToast();
+
+  const getInviteUrl = (guestId: number) => {
+    return `${window.location.origin}/invite/${guestId}`;
+  };
+
+  const sendInviteWhatsApp = (guest: Guest) => {
+    const url = getInviteUrl(guest.id);
+    const msg = `Namaste ${guest.name}! 🙏\n\nYou are cordially invited to *Sanatani Chaturmas 2026*.\n\n📅 15 July 2026, Wednesday\n⏰ 6:00 PM Onwards\n📍 Dharma Sabha Hall, Vrindavan, UP\n\nPlease RSVP here:\n${url}\n\nOrganized by Shri Chaturmas Seva Samiti`;
+    window.open(`https://wa.me/${guest.phone.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(msg)}`, "_blank");
+  };
+
+  const copyInviteLink = (guestId: number) => {
+    const url = getInviteUrl(guestId);
+    navigator.clipboard.writeText(url).then(() => {
+      toast({ title: "Link copied!", description: "Invitation link copied to clipboard." });
+    });
+  };
 
   const filtered = guestsData.filter((g) => {
     const matchSearch =
@@ -195,7 +214,10 @@ export default function AdminGuests() {
                       RSVP
                     </th>
                     <th className="text-left px-4 py-3 text-xs font-semibold text-brown/60 uppercase tracking-wider">
-                      Date
+                      <div className="flex items-center gap-1">Date</div>
+                    </th>
+                    <th className="text-center px-4 py-3 text-xs font-semibold text-brown/60 uppercase tracking-wider">
+                      Invite
                     </th>
                   </tr>
                 </thead>
@@ -244,6 +266,24 @@ export default function AdminGuests() {
                           </div>
                         </td>
                         <td className="px-4 py-3.5 text-xs text-brown/60">{guest.date}</td>
+                        <td className="px-4 py-3.5">
+                          <div className="flex items-center justify-center gap-1.5">
+                            <button
+                              onClick={() => sendInviteWhatsApp(guest)}
+                              className="inline-flex items-center gap-1 bg-green-500 hover:bg-green-600 text-white text-[11px] font-sans font-semibold px-2.5 py-1.5 transition-colors"
+                              title="Send Invite via WhatsApp"
+                            >
+                              <Send size={11} /> Send
+                            </button>
+                            <button
+                              onClick={() => copyInviteLink(guest.id)}
+                              className="inline-flex items-center justify-center border border-gold/60 text-brown/60 hover:text-saffron hover:border-saffron p-1.5 transition-colors"
+                              title="Copy Invite Link"
+                            >
+                              <Link2 size={12} />
+                            </button>
+                          </div>
+                        </td>
                       </tr>
                     );
                   })}

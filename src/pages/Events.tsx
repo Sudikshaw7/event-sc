@@ -109,7 +109,7 @@ export default function EventsPage() {
       </div>
 
       {/* Filter Bar */}
-      <div className="bg-cream border-b border-gold/40 sticky top-[88px] z-30">
+      <div className="bg-cream border-b border-gold/40 sticky top-0 z-30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center gap-2">
           <Filter size={14} className="text-gold shrink-0" />
           <span className="text-xs font-sans font-medium text-brown/60 mr-2 uppercase tracking-wider">Filter:</span>
@@ -130,7 +130,7 @@ export default function EventsPage() {
       </div>
 
       {/* Events Grid */}
-      <main className="flex-1 bg-white py-10 md:py-14">
+      <main className="flex-1 bg-cream py-10 md:py-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filtered.map((event) => (

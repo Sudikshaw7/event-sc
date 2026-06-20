@@ -1,8 +1,11 @@
 import SacredHeader from "@/components/SacredHeader";
 import SacredFooter from "@/components/SacredFooter";
-import { Download, Share2, MapPin, Calendar, Clock } from "lucide-react";
+import { Download, Share2, MapPin, Calendar, Clock, CheckCircle, XCircle } from "lucide-react";
+import { useState } from "react";
 
 export default function InvitationPage() {
+  const [rsvp, setRsvp] = useState<"none" | "accepted" | "declined">("none");
+
   return (
     <div className="min-h-screen flex flex-col">
       <SacredHeader />
@@ -145,6 +148,58 @@ export default function InvitationPage() {
           {/* Info Below Card */}
           <div className="mt-8 text-center text-xs font-sans text-brown/50">
             Share this digital invitation with family and friends. 🙏
+          </div>
+
+          {/* RSVP Section */}
+          <div className="mt-8 text-center">
+            {rsvp === "none" && (
+              <div className="bg-white border border-gold/30 p-6">
+                <p className="font-serif text-lg text-brown mb-1">Will you attend?</p>
+                <p className="text-xs font-sans text-brown/50 mb-5">कृपया अपनी उपस्थिति की पुष्टि करें</p>
+                <div className="flex justify-center gap-4">
+                  <button
+                    onClick={() => setRsvp("accepted")}
+                    className="flex items-center gap-2 bg-green-600 text-white px-6 py-3 text-sm font-sans font-semibold uppercase tracking-wider hover:bg-green-700 transition-colors duration-150"
+                  >
+                    <CheckCircle size={16} /> Accept Invite
+                  </button>
+                  <button
+                    onClick={() => setRsvp("declined")}
+                    className="flex items-center gap-2 border border-red-300 text-red-600 px-6 py-3 text-sm font-sans font-semibold uppercase tracking-wider hover:bg-red-50 transition-colors duration-150"
+                  >
+                    <XCircle size={16} /> Decline
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {rsvp === "accepted" && (
+              <div className="bg-green-50 border border-green-200 p-6">
+                <CheckCircle size={32} className="text-green-600 mx-auto mb-3" />
+                <p className="font-serif text-xl text-green-800 mb-1">You're Accepted!</p>
+                <p className="text-sm font-sans text-green-600 mb-4">We look forward to seeing you at Sanatani Chaturmas 2026.</p>
+                <button
+                  onClick={() => setRsvp("none")}
+                  className="text-xs font-sans text-green-700 underline hover:text-green-900"
+                >
+                  Change Response
+                </button>
+              </div>
+            )}
+
+            {rsvp === "declined" && (
+              <div className="bg-red-50 border border-red-200 p-6">
+                <XCircle size={32} className="text-red-500 mx-auto mb-3" />
+                <p className="font-serif text-xl text-red-800 mb-1">We'll Miss You</p>
+                <p className="text-sm font-sans text-red-600 mb-4">Sorry you can't make it. Hope to see you next time.</p>
+                <button
+                  onClick={() => setRsvp("none")}
+                  className="text-xs font-sans text-red-700 underline hover:text-red-900"
+                >
+                  Change Response
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </main>

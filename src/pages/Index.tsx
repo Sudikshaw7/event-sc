@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import SacredHeader from "@/components/SacredHeader";
 import SacredFooter from "@/components/SacredFooter";
+import Newsletter from "@/components/Newsletter";
 import { Calendar, MapPin, ArrowRight, ChevronRight } from "lucide-react";
 
 const events = [
@@ -60,31 +61,34 @@ export default function HomePage() {
       <SacredHeader />
 
       {/* Hero */}
-      <section className="relative lotus-bg bg-cream overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-orange-50/80 to-white/90 pointer-events-none" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 text-center">
-          <div className="text-6xl md:text-8xl font-serif text-saffron mb-4 opacity-90 leading-none">ॐ</div>
-          <p className="text-xs md:text-sm font-sans uppercase tracking-[0.3em] text-gold mb-4">
+      <section className="relative bg-cream overflow-hidden">
+        <div className="absolute inset-0">
+          <img src="/10.png" alt="Sanatani Chaturmas Hero" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-b from-orange-50/60 via-orange-50/40 to-cream/95" />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32 text-center">
+          <div className="text-6xl md:text-8xl font-serif text-white mb-4 opacity-90 leading-none drop-shadow-lg">ॐ</div>
+          <p className="text-xs md:text-sm font-sans uppercase tracking-[0.3em] text-yellow-200 mb-4 font-bold drop-shadow-md">
             ✦ Ashadha to Kartik 2024 ✦
           </p>
-          <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl text-brown leading-tight mb-6">
+          <h1 className="font-serif text-4xl md:text-6xl lg:text-7xl text-white font-bold leading-tight mb-6 drop-shadow-lg">
             Sanatani Chaturmas
-            <span className="block text-saffron text-3xl md:text-4xl mt-2">सनातनी चातुर्मास</span>
+            <span className="block text-yellow-300 text-3xl md:text-4xl mt-2 font-bold drop-shadow-lg">सनातनी चातुर्मास</span>
           </h1>
-          <p className="max-w-2xl mx-auto font-sans text-base md:text-lg text-brown/70 mb-10 leading-relaxed">
+          <p className="max-w-2xl mx-auto font-sans text-base md:text-lg text-white mb-10 leading-relaxed font-medium drop-shadow-md">
             Four sacred months of Pravachans, Seva, Bhandaras, and devotional gatherings.
             Join thousands of devotees in this timeless tradition.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/events"
-              className="inline-flex items-center gap-2 bg-saffron text-white px-8 py-3 font-sans font-semibold text-sm uppercase tracking-wider hover:bg-orange-600 transition-colors duration-150"
+              className="inline-flex items-center gap-2 bg-saffron text-white px-8 py-3 font-sans font-bold text-sm uppercase tracking-wider hover:bg-orange-600 transition-colors duration-150 shadow-lg"
             >
               View All Events <ArrowRight size={16} />
             </Link>
             <Link
               to="/donation"
-              className="inline-flex items-center gap-2 border border-gold text-brown px-8 py-3 font-sans font-semibold text-sm uppercase tracking-wider hover:bg-gold hover:text-white transition-colors duration-150"
+              className="inline-flex items-center gap-2 bg-white/90 text-brown px-8 py-3 font-sans font-bold text-sm uppercase tracking-wider hover:bg-white transition-colors duration-150 shadow-lg"
             >
               Make a Donation
             </Link>
@@ -99,8 +103,8 @@ export default function HomePage() {
               { value: "₹12L+", label: "Donations" },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
-                <div className="font-serif text-3xl md:text-4xl text-saffron">{stat.value}</div>
-                <div className="font-sans text-xs text-brown/60 uppercase tracking-wider mt-1">{stat.label}</div>
+                <div className="font-serif text-3xl md:text-4xl text-white font-bold drop-shadow-md">{stat.value}</div>
+                <div className="font-sans text-xs text-yellow-100 font-semibold uppercase tracking-wider mt-1 drop-shadow-sm">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -210,6 +214,51 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Guest List */}
+      <section className="bg-white py-14 md:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <p className="text-xs font-sans uppercase tracking-[0.25em] text-gold mb-2">अतिथि सूची</p>
+            <h2 className="font-serif text-3xl md:text-4xl text-brown">Featured Guests</h2>
+            <div className="mt-3 flex justify-center gap-1 text-gold text-xs">❈ ❈ ❈</div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {[
+              { name: "Ramesh Sharma", location: "Vrindavan, UP", event: "Pravesh Mahotsav", vip: true },
+              { name: "Anita Mehta", location: "Mumbai, Maharashtra", event: "Pravesh Mahotsav", vip: true },
+              { name: "Kavita Joshi", location: "Jaipur, Rajasthan", event: "Purnima Bhandara", vip: true },
+              { name: "Deepa Narayanan", location: "Bangalore, Karnataka", event: "Deepotsav", vip: true },
+            ].map((guest) => (
+              <div key={guest.name} className="sacred-card bg-cream p-5 flex items-start gap-4 hover:border-gold/60 transition-colors">
+                <div className="w-10 h-10 rounded-full bg-saffron/10 border border-gold/40 flex items-center justify-center text-saffron font-serif text-lg shrink-0">
+                  {guest.name.charAt(0)}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 mb-1">
+                    <h3 className="font-serif text-brown text-base truncate">{guest.name}</h3>
+                    {guest.vip && (
+                      <span className="text-[10px] bg-gold text-white px-1.5 py-0.5 font-bold shrink-0">VIP</span>
+                    )}
+                  </div>
+                  <p className="text-xs font-sans text-brown/60 mb-1">{guest.location}</p>
+                  <p className="text-xs text-brown/40 font-sans">{guest.event}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-8">
+            <Link
+              to="/guests"
+              className="inline-flex items-center gap-2 border border-gold text-brown px-8 py-3 font-sans text-sm font-semibold hover:bg-gold hover:text-white transition-colors duration-150"
+            >
+              View Full Guest List <ArrowRight size={16} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Gallery Strip */}
       <section className="bg-white py-14 md:py-20 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -227,6 +276,97 @@ export default function HomePage() {
                 <img className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" src={item.img_url} />
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Show Reel */}
+      <section className="bg-cream py-14 md:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <p className="text-xs font-sans uppercase tracking-[0.25em] text-gold mb-2">Witness the Divine</p>
+            <h2 className="font-serif text-3xl md:text-4xl text-brown">Show Reel</h2>
+            <div className="mt-3 flex justify-center gap-1 text-gold text-xs">❈ ❈ ❈</div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            {/* Featured Video */}
+            <div className="md:col-span-2 sacred-card bg-brown overflow-hidden group cursor-pointer">
+              <div className="relative aspect-video">
+                <img
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  src="https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_0bfa871f6c_10c36dacdfe6f5f1.png"
+                  alt="Chaturmas Highlights"
+                />
+                <div className="absolute inset-0 bg-brown/40 group-hover:bg-brown/20 transition-colors duration-300" />
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-16 h-16 md:w-20 md:h-20 bg-saffron rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                    <svg className="w-6 h-6 md:w-8 md:h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M8 5v14l11-7z" />
+                    </svg>
+                  </div>
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brown/90 to-transparent p-4 md:p-6">
+                  <span className="text-xs font-sans font-semibold text-saffron uppercase tracking-wider">Featured</span>
+                  <h3 className="font-serif text-xl md:text-2xl text-white mt-1">Chaturmas 2024 Highlights</h3>
+                  <p className="font-sans text-sm text-white/70 mt-1">12 min • 50K+ views</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Video Thumbnails */}
+            {[
+              {
+                title: "Pravesh Mahotsav Ceremony",
+                duration: "8:45",
+                img: "https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_b6901f220d_4da96d0cac6cd524.png",
+              },
+              {
+                title: "Gita Pravachan Day 1",
+                duration: "45:20",
+                img: "https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_ac49852b2d_6c16df7d3a84ce6c.png",
+              },
+              {
+                title: "Bhandara Seva Moments",
+                duration: "6:30",
+                img: "https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_a5bfcc89db_81afbbb2a8954285.png",
+              },
+              {
+                title: "Yagna Ceremony 2024",
+                duration: "12:15",
+                img: "https://storage.googleapis.com/uxpilot-auth.appspot.com/gen_d9e6e0f59d_78ee6dfa296e8d79.png",
+              },
+            ].map((video, i) => (
+              <div key={i} className="sacred-card bg-white overflow-hidden group cursor-pointer">
+                <div className="relative aspect-video">
+                  <img
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    src={video.img}
+                    alt={video.title}
+                  />
+                  <div className="absolute inset-0 bg-brown/30 group-hover:bg-brown/10 transition-colors duration-300" />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-12 h-12 bg-saffron/90 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                      <svg className="w-5 h-5 text-white ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <div className="absolute bottom-2 right-2 bg-brown/80 px-2 py-0.5">
+                    <span className="text-xs font-sans text-white">{video.duration}</span>
+                  </div>
+                </div>
+                <div className="p-3">
+                  <h3 className="font-serif text-base text-brown group-hover:text-saffron transition-colors">{video.title}</h3>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center mt-8">
+            <button className="inline-flex items-center gap-2 border border-gold text-brown px-8 py-3 font-sans text-sm font-semibold hover:bg-gold hover:text-white transition-colors duration-150">
+              View All Videos <ArrowRight size={16} />
+            </button>
           </div>
         </div>
       </section>
@@ -251,6 +391,8 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
+
+      <Newsletter variant="section" />
 
       <SacredFooter />
     </div>
