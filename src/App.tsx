@@ -26,7 +26,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <WhatsAppPopup />
-      <BrowserRouter basename="https://event-sc.vercel.app">
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/events" element={<Events />} />
